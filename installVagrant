@@ -1,1 +1,18 @@
 #!/bin/bash
+
+PACKAGE='vagrant_2.0.4_x86_64.deb'
+
+#download package
+rm -f $PACKAGE
+wget https://releases.hashicorp.com/vagrant/2.0.4/vagrant_2.0.4_x86_64.deb
+
+#verify that SHASUM matches the binary
+#wget https://releases.hashicorp.com/vagrant/2.0.4/vagrant_2.0.4_SHA256SUMS
+shasum -a 256 -c vagrant_2.0.4_SHA256SUMS
+
+#install package
+sudo dpkg -i $PACKAGE
+sudo apt-get install -f
+
+#remove artifact
+rm -f $PACKAGE
